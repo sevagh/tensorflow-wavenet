@@ -205,6 +205,12 @@ def main():
     with open(args.wavenet_params, 'r') as f:
         wavenet_params = json.load(f)
 
+    x = WaveNetModel.calculate_receptive_field(wavenet_params["filter_width"],
+                                                                   wavenet_params["dilations"],
+                                                                   wavenet_params["scalar_input"],
+                                                                   wavenet_params["initial_filter_width"])
+    print('receptive field: {0}'.format(x))
+
     # Create coordinator.
     coord = tf.train.Coordinator()
 
